@@ -1,0 +1,33 @@
+<div class="flex items-center justify-center min-h-screen bg-gray-900">
+    <div class="bg-sky-400 w-96 p-8 rounded-lg shadow-lg text-center">
+        <h2 class="text-white text-lg font-bold underline mb-6">
+            Connexion à votre compte
+        </h2>
+
+        <form (ngSubmit)="onLogin()" class="flex flex-col space-y-4">
+
+            <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required
+                class="w-full px-4 py-2 rounded-full bg-sky-200/80 text-white placeholder-white text-center focus:outline-none">
+
+            <input type="password" [(ngModel)]="password" name="password" placeholder="Password" required
+                class="w-full px-4 py-2 rounded-full bg-sky-200/80 text-white placeholder-white text-center focus:outline-none">
+            <button type="submit"
+                class="bg-gray-300 text-white font-semibold py-2 px-4 rounded hover:bg-gray-400 disabled:opacity-50">CONNEXION</button>
+
+                @if (errorMessage) {
+                    <p class="text-red-600 font-semibold mt-2">
+                        {{ errorMessage }}
+                    </p>
+                }
+        </form>
+
+        <p class="mt-4 text-white">
+            Pas encore de compte ?
+            <button
+            (click)="goToSignup()"
+            class="underline font-semibold hover:text-gray-200">
+            Créez-en un
+        </button>
+        </p>
+    </div>
+</div>

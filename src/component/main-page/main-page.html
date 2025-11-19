@@ -1,0 +1,78 @@
+<app-header></app-header>
+
+<main class="min-h-screen bg-gradient-to-b from-blue-500 to-blue-700 flex flex-col items-center justify-center p-6">
+
+  <div class="relative w-full max-w-md">
+  <div class="flex items-center w-full max-w-md bg-white rounded-full shadow-lg px-4 py-2">
+    <label for="ville" class="sr-only">Ville</label>
+    <input 
+      type="text"
+      id="ville"
+      name="ville"
+      placeholder="Choisis ta ville :"
+      [(ngModel)]="cityName"
+      (keyup.enter)="searchCity()"
+      (input)="onInputChange(cityName)"
+      class="flex-1 text-gray-800 p-2 rounded-full focus:outline-none placeholder-gray-400"
+    >
+    <button
+      type="button"
+      class="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full transition-colors"
+      (click)="searchCity()"
+    >
+      <img src="assets/icons/Search.svg" alt="Rechercher" class="w-5 h-5">
+    </button>
+  </div>
+   @if (suggestions.length > 0) {
+  <ul class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg z-10 w-full max-w-md">
+    @for (city of suggestions; track city) {
+          <li
+        (click)="selectSuggestion(city)"
+        class="px-4 py-2 hover:bg-blue-100 cursor-pointer">
+        {{ city.name }} ({{ city.country }})
+      </li>
+    }
+</ul>
+   }
+</div>
+
+  <ul class="mt-6 space-y-4 w-full max-w-md">
+    @for (data of datas; track data) {
+      <li class="bg-white/90 backdrop-blur-md p-6 rounded-xl shadow-md flex flex-col items-center text-center space-y-3">
+        
+        <span class="text-lg font-semibold text-gray-800">
+          📍 {{ data.name }}
+        </span>
+
+        <span class="text-3xl font-bold text-blue-600">
+          🌡 {{ data.main?.temp | number:'1.0-0' }}°C
+        </span>
+        <span class="text-sm text-gray-600">
+          Ressenti : {{ data.main?.feels_like }}°C
+        </span>
+
+        <div class="flex items-center space-x-2 bg-blue-100 px-4 py-2 rounded-lg shadow-inner">
+          <span class="text-blue-700 text-lg">🌬</span>
+          <span class="text-gray-800 font-medium">
+              {{ getWindSpeedKmH(data.wind?.speed || 'valeur inconnue') }} km/h
+            ({{ getWindDirection(data.wind?.deg || 'valeur inconnue') }})
+          </span>
+        </div>
+
+        <ul class="mt-2 space-y-1 text-gray-600">
+          @for (w of weather; track w) {
+            <li class="italic capitalize">☁️ {{ w.description }}</li>
+          }
+        </ul>
+      </li>
+      <button
+  (click)="addToFavorites(data)"
+  class="mt-3 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg shadow-md"
+>
+  ⭐ Ajouter aux favoris
+</button>
+    }
+  </ul>
+  <app-weekly [lat]="lat" [lon]="lon"></app-weekly>
+  <app-setting-page></app-setting-page>
+</main>
