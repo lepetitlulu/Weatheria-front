@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class Favorite {
-  private apiUrl = 'https://weatheria-back.onrender.com'
+  private apiUrl = 'https://weatheria-back.onrender.com/api'
 
   constructor(private http: HttpClient) {}
 

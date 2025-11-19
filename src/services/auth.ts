@@ -10,7 +10,7 @@ import { Router } from '@angular/router'
 export class Auth {
   private router = inject(Router)
 
-  private apiUrl = 'https://weatheria-back.onrender.com'
+  private apiUrl = 'https://weatheria-back.onrender.com/api'
 
   constructor(private http: HttpClient) {}
 

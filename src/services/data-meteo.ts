@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DataMeteo {
-  private backendUrl = 'https://weatheria-back.onrender.com'
+  private backendUrl = 'https://weatheria-back.onrender.com/api'
 
   constructor(private http: HttpClient) {}
 
